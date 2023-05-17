@@ -31,3 +31,9 @@
 /Users/gav/Desktop/универ/csharp/ProductShop/obj/Debug/net7.0/ProductShop.pdb
 /Users/gav/Desktop/универ/csharp/ProductShop/obj/Debug/net7.0/ProductShop.genruntimeconfig.cache
 /Users/gav/Desktop/универ/csharp/ProductShop/obj/Debug/net7.0/ref/ProductShop.dll
+/Users/gav/Desktop/универ/csharp/ProductShop/bin/Debug/net7.0/Frontend/product-management-ui/.prettierrc.json
+/Users/gav/Desktop/универ/csharp/ProductShop/bin/Debug/net7.0/Frontend/product-management-ui/package-lock.json
+/Users/gav/Desktop/универ/csharp/ProductShop/bin/Debug/net7.0/Frontend/product-management-ui/package.json
+/Users/gav/Desktop/универ/csharp/ProductShop/bin/Debug/net7.0/Frontend/product-management-ui/tsconfig.app.json
+/Users/gav/Desktop/универ/csharp/ProductShop/bin/Debug/net7.0/Frontend/product-management-ui/tsconfig.json
+/Users/gav/Desktop/универ/csharp/ProductShop/bin/Debug/net7.0/Frontend/product-management-ui/tsconfig.node.json
