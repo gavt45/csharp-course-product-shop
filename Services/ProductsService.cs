@@ -1,10 +1,16 @@
+using System.ComponentModel;
+using System.Reflection.Metadata;
+
 namespace ProductShop.Services;
 
 using ProductShop.Models;
 
+using System;
+using System.Reflection;
+
 public static class ProductsService
 {
-    static List<Product> Products { get; }
+    private static List<Product> Products { get; }
     static int nextId = 3;
     static ProductsService()
     {
@@ -48,5 +54,32 @@ public static class ProductsService
 
         Products[index] = pizza;
     }
+
+    public static List<Product> Sort(string field, bool sortType)
+    {
+        switch (field)
+        {
+            case "name":
+                return sortType? Products.OrderBy(x => x.Name).ToList() : Products.OrderByDescending(x => x.Name).ToList();
+            case "price":
+                return sortType? Products.OrderBy(x => x.Price).ToList() : Products.OrderByDescending(x => x.Price).ToList();
+            default:
+                return Products;
+        }
+    }
+    
+    public static List<Product> Filter(string field,  string value)
+    {
+        switch (field)
+        {
+            case "name":
+                return Products.FindAll(x => x.Name == value);
+            case "price":
+                return Products.FindAll(x => x.Price == int.Parse(value));
+            default:
+                return Products;
+        }
+    }
+    
 }
 

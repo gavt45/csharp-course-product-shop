@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUpdated } from 'vue';
+import {onBeforeUpdate, onUpdated} from 'vue';
 import TheWelcome from '../components/TheWelcome.vue'
 import {ref, computed} from 'vue';
 import {useRouter} from 'vue-router';
@@ -50,10 +50,18 @@ function deleteProduct(id: any) {
       // .then((response)=>response.json())
       .then((responseJson)=>{getProducts()});
 }
+function onSort(value: any, sortType: any){
+    sortProducts(value, sortType);
+}
+function sortProducts(value: any, sortType: any) {
+    fetch(`http://localhost:5265/api/v1/products/SortBy=${value},${sortType}`, {method: 'GET'})
+        .then((response)=>response.json())
+        .then(data => products.value = data)
+}
 
-var _ = setInterval(function() {
-  getProducts();
-}, 5000);
+// var _ = setInterval(function() {
+//   getProducts();
+// }, 5000);
 
 // router.beforeEach(() => getProducts());
 
@@ -66,7 +74,6 @@ onMounted(() => getProducts());
   max-width: 350px;
 }
 </style>
-
 <template>
   <q-page class="q-pa-md">
     <div class="q-pa-md row items-start q-gutter-md">
@@ -74,16 +81,15 @@ onMounted(() => getProducts());
       <!-- <q-btn @click="" color="Primary">Fetch</q-btn> -->
       
       <!-- <p v-for="product in products">{{ product }}</p> -->
-
       <q-card v-for="product in products" class="my-card" flat bordered>
         <q-img :src=product.picture />
 
         <q-card-section>
           <div class="text-overline text-orange-9">Overline</div>
           <div class="text-h5 q-mt-sm q-mb-xs">{{ product.name }}</div>
-          <div class="text-caption text-grey">
-            {{ product.description }}
-          </div>
+            <div class="text-subtitle1">
+                {{product.price }}$ 
+            </div>
         </q-card-section>
 
         <q-card-actions>
@@ -112,10 +118,29 @@ onMounted(() => getProducts());
         </q-slide-transition>
       </q-card>
     </div>
+    <q-page-sticky position="top-right">
+      <div class="column"></div>
+        <p style="text-align:center"><i>Sort by name</i></p>
+        <div class="row-1" title="Sort by name">
+            <q-btn-group outline>
+              <q-btn outline color="blue" label="asc" @click="onSort('name', 'asc')"/>
+              <q-btn outline color="blue" label="desc" @click="onSort('name', 'desc')"/>
+            </q-btn-group>
+        </div>
+        <p style="text-align:center"><i>Sort by price</i></p>
+        <div class="row-2" title="Sort by price">
+            <q-btn-group outline>
+              <q-btn outline color="green" label="asc" @click="onSort('price', 'asc')"/>
+              <q-btn outline color="green" label="desc" @click="onSort('price', 'desc')"/>
+            </q-btn-group>
+        </div>
+    </q-page-sticky>
 
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
       <q-btn fab icon="add" color="accent" @click="router.push('/create');"/>
     </q-page-sticky>
+        
+      
   </q-page>
   <!-- <div class="q-pa-md">
     <-- <div class="row justify-between"> 
